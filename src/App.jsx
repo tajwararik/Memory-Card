@@ -26,6 +26,27 @@ function App() {
     }
   }
 
+  function getEmojisArray(cardData) {
+    const randomIndices = getRandomIndices(cardData);
+
+    const emojisArray = randomIndices.map((index) => cardData[index]);
+
+    return emojisArray;
+  }
+
+  function getRandomIndices(cardData) {
+    const randomIndices = [];
+
+    for (let i = 0; i < cardData.length; i++) {
+      const random = Math.floor(Math.random() * cardData.length);
+
+      if (!randomIndices.includes(random)) randomIndices.push(random);
+      else i--;
+    }
+
+    return randomIndices;
+  }
+
   return (
     <>
       <h1>Memory Card</h1>
