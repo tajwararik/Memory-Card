@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/style.css";
 
-function EmojiButton({ emojiData }) {
+function EmojiButton({ emojiData, handleClick }) {
   const [emojiURL, setEmojiURL] = useState("");
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function EmojiButton({ emojiData }) {
   }, [emojiData.url]);
 
   return (
-    <div className="emoji-button">
+    <div className="emoji-button" onClick={() => handleClick(emojiData.name)}>
       <div className="image-container">
         {emojiURL && <img src={emojiURL} alt={emojiData.name} />}
       </div>
