@@ -6,4 +6,35 @@ button {
   padding: 12px 20px;
   border-radius: 12px;
   cursor: pointer;
+  box-shadow: 1px 1px 8px 1px rgba(255, 255, 255, 0.5);
+}
+
+.card-container {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards {
+  margin: 10px;
+}
+
+.emoji-button {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  background-color: #a0046c;
+  border: 5px ridge #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-container {
+  width: 100px;
+  margin: 0 auto;
 }
