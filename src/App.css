@@ -11,6 +11,8 @@ body {
   min-height: 100vh;
   font-family: "Pacifico", cursive;
   font-size: 16px;
+  color: #fff;
+  background-color: #541588;
   text-align: center;
   padding: 20px;
 }
