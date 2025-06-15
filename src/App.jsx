@@ -10,7 +10,7 @@ function App() {
   async function startGame() {
     try {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=20"
+        "https://pokeapi.co/api/v2/pokemon?limit=16"
       );
 
       if (!response.ok) console.log("Could not fetched");
