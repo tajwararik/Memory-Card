@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StartGame from "./components/StartGame";
 import MemoryCard from "./components/MemoryCard";
 import "./App.css";
@@ -6,6 +6,7 @@ import "./App.css";
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojiCards, setEmojiCards] = useState([]);
+  const [selectedCards, setSelectedCards] = useState([]);
 
   async function startGame() {
     try {
@@ -47,6 +48,10 @@ function App() {
     return randomIndices;
   }
 
+  function getSelectedCards(emojiName) {
+    setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
+  }
+
   return (
     <>
       <h1>Memory Card</h1>
@@ -55,7 +60,9 @@ function App() {
         once!
       </p>
       {!isGameOn && <StartGame handleClick={startGame} />}
-      {isGameOn && <MemoryCard cards={emojiCards} />}
+      {isGameOn && (
+        <MemoryCard cards={emojiCards} handleClick={getSelectedCards} />
+      )}
     </>
   );
 }
