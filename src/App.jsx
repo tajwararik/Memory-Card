@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import StartGame from "./components/StartGame";
 import MemoryCard from "./components/MemoryCard";
 import GameBoard from "./components/GameBoard";
+import ResetGame from "./components/ResetGame";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [maxScore, selectMaxScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
     if (selectedCards.length !== 0) {
@@ -63,13 +65,34 @@ function App() {
     if (selectedCards.includes(emojiName)) {
       setSelectedCards([]);
 
-      selectMaxScore(score);
-      setScore(0);
-    } else {
-      setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
+      score > maxScore && selectMaxScore(score);
 
-      setScore((prevScore) => prevScore + 1);
+      setIsGameOn(false);
+      setIsGameOver(true);
+    } else {
+      const newSelectedCards = [...selectedCards, emojiName];
+
+      if (newSelectedCards.length === 16) {
+        setSelectedCards([]);
+
+        setScore((prevScore) => prevScore + 1);
+
+        score + 1 > maxScore && selectMaxScore(score + 1);
+
+        setIsGameOn(false);
+        setIsGameOver(true);
+      } else {
+        setSelectedCards(newSelectedCards);
+
+        setScore((prevScore) => prevScore + 1);
+      }
     }
+  }
+
+  function resetGame() {
+    setScore(0);
+    setIsGameOn(true);
+    setIsGameOver(false);
   }
 
   return (
@@ -79,11 +102,12 @@ function App() {
         Get points by clicking on an image but don't click on any more than
         once!
       </p>
-      {!isGameOn && <StartGame handleClick={startGame} />}
-      {isGameOn && (
+      {!isGameOn && !isGameOver && <StartGame handleClick={startGame} />}
+      {isGameOn && !isGameOver && (
         <MemoryCard cards={emojiCards} handleClick={getSelectedCards} />
       )}
       {isGameOn && <GameBoard currentScore={score} bestScore={maxScore} />}
+      {isGameOver && <ResetGame currentScore={score} handleClick={resetGame} />}
     </>
   );
 }
