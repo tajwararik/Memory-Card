@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import StartGame from "./components/StartGame";
 import MemoryCard from "./components/MemoryCard";
+import GameBoard from "./components/GameBoard";
 import "./App.css";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
   const [emojiCards, setEmojiCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [score, setScore] = useState(0);
+  const [maxScore, selectMaxScore] = useState(0);
 
   useEffect(() => {
     if (selectedCards.length !== 0) {
@@ -61,6 +63,7 @@ function App() {
     if (selectedCards.includes(emojiName)) {
       setSelectedCards([]);
 
+      selectMaxScore(score);
       setScore(0);
     } else {
       setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
@@ -80,6 +83,7 @@ function App() {
       {isGameOn && (
         <MemoryCard cards={emojiCards} handleClick={getSelectedCards} />
       )}
+      {isGameOn && <GameBoard currentScore={score} bestScore={maxScore} />}
     </>
   );
 }
