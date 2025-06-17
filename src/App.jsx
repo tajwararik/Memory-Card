@@ -8,6 +8,14 @@ function App() {
   const [emojiCards, setEmojiCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
+  useEffect(() => {
+    if (selectedCards.length !== 0) {
+      const emojiArray = getEmojisArray(emojiCards);
+
+      setEmojiCards(emojiArray);
+    }
+  }, [selectedCards.length]);
+
   async function startGame() {
     try {
       const response = await fetch(
@@ -49,7 +57,8 @@ function App() {
   }
 
   function getSelectedCards(emojiName) {
-    setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
+    if (selectedCards.includes(emojiName)) setSelectedCards([]);
+    else setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
   }
 
   return (
