@@ -38,3 +38,10 @@ button {
   width: 100px;
   margin: 0 auto;
 }
+
+.dash-board {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 25px;
+  column-gap: 25px;
+}
