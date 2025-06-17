@@ -7,6 +7,7 @@ function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojiCards, setEmojiCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     if (selectedCards.length !== 0) {
@@ -57,8 +58,15 @@ function App() {
   }
 
   function getSelectedCards(emojiName) {
-    if (selectedCards.includes(emojiName)) setSelectedCards([]);
-    else setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
+    if (selectedCards.includes(emojiName)) {
+      setSelectedCards([]);
+
+      setScore(0);
+    } else {
+      setSelectedCards((prevEmojiName) => [...prevEmojiName, emojiName]);
+
+      setScore((prevScore) => prevScore + 1);
+    }
   }
 
   return (
